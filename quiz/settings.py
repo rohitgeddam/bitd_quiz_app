@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # user apps,
     'users.apps.UsersConfig',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
