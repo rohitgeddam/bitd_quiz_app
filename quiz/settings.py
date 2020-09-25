@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # 3rd party
     'allauth',
     'allauth.account',
-
+    'crispy_forms',
     # user apps,
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
@@ -149,6 +149,8 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # allauth config
 LOGIN_REDIRECT_URL = 'home_page'
