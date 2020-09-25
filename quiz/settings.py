@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # required for allauth
+    'django.contrib.sites',
+
+    # 3rd party
+    'allauth',
+    'allauth.account',
+
     # user apps,
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
@@ -45,6 +52,12 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# explicitly defined to use with allauth
+AUTHENTICATION_BACKEND = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,3 +142,18 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static'),]
 
 # static_root is for production
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+
+# required by allauth
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# allauth config
+LOGIN_REDIRECT_URL = 'home_page'
+ACCOUNT_LOGOUT_REDIRECT = 'home_page'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD  = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
