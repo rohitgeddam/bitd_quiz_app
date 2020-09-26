@@ -20,6 +20,6 @@ class QuizAdmin(nested_admin.NestedModelAdmin):
 
 
 admin.site.register(Quiz, QuizAdmin)
-
+admin.site.register(Response)
 admin.site.register(QuizTaker)
 

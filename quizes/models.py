@@ -56,8 +56,10 @@ class Response(models.Model):
     user = models.ForeignKey(get_user_model(), related_name='responses',  on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, related_name='responses', on_delete=models.CASCADE)
     question = models.ForeignKey(Question, related_name='responses', on_delete=models.CASCADE)
-    option = models.ForeignKey(Option, related_name='responses',  on_delete=models.CASCADE)
-
+    option = models.ForeignKey(Option, related_name='responses',  on_delete=models.CASCADE, null=True, blank=True)
+    
+    correct_option = models.ForeignKey(Option, related_name='correct_response', on_delete=models.CASCADE)
+    is_correct = models.BooleanField(default=False)
     def __str__(self):
         return f'{self.user.username}_{self.quiz.name}'
     

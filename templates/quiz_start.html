@@ -13,6 +13,39 @@
 
     {% if attempted %}
         <h1>You already attempted</h1>
+        <h2>Your Response</h2>
+        
+        <div class="table-responsive">
+       
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Question</th>
+      <th scope="col">Your Answer</th>
+      <th scope="col">Correct Answer</th>
+      <th scope="col">Correct?</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for response in responses %}
+    <tr>
+      <th scope="row">{{response.question.text}}</th>
+   
+      {% if response.user_option %}
+        <td>{{response.user_option.text}}</td>
+      {% else %}
+      <td>No Response</td>
+      {% endif %}
+      <td>{{response.correct_option.text}}</td>
+      <td>{{response.is_correct|yesno:"right,wrong"}}</td>
+    </tr>
+  {% endfor %}
+   
+  </tbody>
+</table>
+ </div>
+
+
     {% else %}
     <form method="POST" action="{% url 'quiz_submit' quiz.slug %}">
         {%csrf_token %}
