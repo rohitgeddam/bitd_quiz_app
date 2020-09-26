@@ -26,8 +26,8 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
+    firstname = models.CharField(max_length=255, default="")
+    lastname = models.CharField(max_length=255, default="")
     college_name = models.CharField(max_length=512,choices=COLLEGE_CHOICES, default="other")
     branch = models.CharField(max_length=5, choices=BRANCH, default="OTHER")
 

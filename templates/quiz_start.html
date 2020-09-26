@@ -57,7 +57,7 @@
 
         {% for option in question.options.all %}
             <li>
-                {{option.id}}
+                
                 <input type="radio" id={{question.id}} name={{question.id}} value={{option.id}} />
                 <label for={{question.id}}>{{option.text}}</label>
             </li>

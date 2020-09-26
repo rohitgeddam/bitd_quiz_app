@@ -7,4 +7,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = "__all__"
-        exclude = ['user', 'completed_profile']
+        # exclude = ('last_modified',)
+        widgets = {'completed_profile': forms.HiddenInput(), 'user': forms.HiddenInput()}
+        
+        

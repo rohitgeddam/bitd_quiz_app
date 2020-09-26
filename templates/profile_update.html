@@ -9,9 +9,9 @@
 
 
 {% block content %}
-    <form method="POST" action="{% url 'profile_create'%}">
+    <form method="POST" action="{% url 'profile_update'%}">
         {%csrf_token%}
         {{form|crispy}}
-        <input type="button" value="Submit" class="btn btn-success"/>
+        <input type="submit" value="Submit" class="btn btn-success"/>
     </form>
 {% endblock content %}
