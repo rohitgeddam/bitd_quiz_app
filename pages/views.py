@@ -4,6 +4,7 @@ from quizes.models import Quiz, QuizTaker, Response, Option
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
+from .decorators import profile_completion_required
 # Create your views here.
 
 class HomePageView(ListView):
@@ -15,6 +16,7 @@ class HomePageView(ListView):
     queryset = Quiz.objects.filter(roll_out=True)
 
 @login_required
+@profile_completion_required()
 def QuizStartPage(request, slug):
     quiz = Quiz.objects.filter(slug=slug).first()
     questions = quiz.questions.all()
