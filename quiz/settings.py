@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
     'pages.apps.PagesConfig',
+    'quizes.apps.QuizesConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
