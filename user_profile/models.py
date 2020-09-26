@@ -5,9 +5,36 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Profile(models.Model):
+
+    COLLEGE_CHOICES = (
+        ("Bhilai Institute Of Technology, Durg", "Bhilai Institute Of Technology, Durg"),
+        ( "National Institute of Technology, Raipur", "National Institute of Technology, Raipur"),
+        ("Sankracharya Institute of Technology, Bhilai", "Sankracharya Institute of Technology, Bhilai"),
+        ("other", "other"),
+    )
+
+    BRANCH = (
+        ("IT","IT"),
+        ("CSE", "CSE"),
+        ("MECH", "MECH"),
+        ("ETC", "ETC"),
+        ("EE", "EE"),
+        ("CHE", "CHE"),
+        ("CIVIL", "CIVIL"),
+        ("MCA", "MCA"),
+        ("OTHER","OTHER")
+    )
+
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
+    college_name = models.CharField(max_length=512,choices=COLLEGE_CHOICES, default="other")
+    branch = models.CharField(max_length=5, choices=BRANCH, default="OTHER")
+
+    last_modified = models.DateTimeField(auto_now=True)
+    
+    completed_profile = models.BooleanField(default=False)
+    
     
     def __str__(self):
         return self.user.username

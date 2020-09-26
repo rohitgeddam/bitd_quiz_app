@@ -1,0 +1,17 @@
+{% extends '_base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Profile Create
+{% endblock title %}
+
+
+{% block content %}
+    <form method="POST" action="{% url 'profile_create'%}">
+        {%csrf_token%}
+        {{form|crispy}}
+        <input type="button" value="Submit" class="btn btn-success"/>
+    </form>
+{% endblock content %}

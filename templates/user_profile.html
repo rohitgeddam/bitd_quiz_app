@@ -1,0 +1,43 @@
+{% extends '_base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    My Profile
+{% endblock title %}
+
+
+{% block content %}
+    <h1> My Profile </h1>
+    <table class="table table-bordered table-dark">
+ 
+  <tbody>
+    <tr>
+      <th scope="row">First Name</th>
+      <td>{{user_profile.firstname}}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">Last Name</th>
+      <td>{{user_profile.lastname}}</td>
+  
+    </tr>
+    <tr>
+      <th scope="row">College</th>
+      <td colspan="2">{{user_profile.college_name}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Branch</th>
+      <td colspan="2">{{user_profile.branch}}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">
+        <a href="#" class="btn btn-warning">update</a>
+      </th>
+      
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}

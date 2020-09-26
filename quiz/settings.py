@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'nested_admin',
     # user apps,
     'users.apps.UsersConfig',
-    'user_profile.apps.UserProfileConfig',
+    'user_profile',
     'pages.apps.PagesConfig',
     'quizes.apps.QuizesConfig',
 ]

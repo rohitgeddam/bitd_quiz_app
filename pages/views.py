@@ -25,6 +25,8 @@ def QuizStartPage(request, slug):
   
     
     if(attempted):
+        score = QuizTaker.objects.filter(user=user, quiz=quiz).first().score
+        
         user_response = []
         for question in questions:
           
@@ -46,7 +48,7 @@ def QuizStartPage(request, slug):
             
             user_response.append(data)
 
-        return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted,"responses": user_response})
+        return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted,"responses": user_response, "score":score})
           
 
     return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted,})
