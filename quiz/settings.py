@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'crispy_forms',
+    'nested_admin',
     # user apps,
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
