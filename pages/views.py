@@ -1,10 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from quizes.models import Quiz, QuizTaker, Response, Option
-
-from django.http import HttpResponse
-
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -65,7 +63,7 @@ def QuizSubmit(request, slug):
     quiz_taker_score = 0
 
     if (attempted):
-        return HttpResponse("This is not allowed.")
+        return redirect(reverse_lazy("quiz_start", args=(quiz.slug,)))
     else:
         responses = []
         for question in questions:
@@ -116,4 +114,4 @@ def QuizSubmit(request, slug):
 
         Response.objects.bulk_create(responses)
        
-        return HttpResponse("done" + str(quiz_taker_score))
+        return redirect(reverse_lazy("quiz_start",args=(quiz.slug,)))
