@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from slugify import slugify
+from django.urls import reverse
 # Create your models here.
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -10,6 +11,8 @@ class Quiz(models.Model):
     allowed_time = models.DurationField()
     roll_out = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = 'quizes'
     def __str__(self):
         return self.name
     
@@ -17,6 +20,10 @@ class Quiz(models.Model):
         value = self.name
         self.slug = slugify(value)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('quiz_start', args=(self.slug,))
+        
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, related_name='questions', on_delete=models.CASCADE)

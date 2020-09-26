@@ -1,0 +1,40 @@
+{% extends '_base.html'%}
+{% load static %}
+
+
+
+{% block title %}
+    {{quiz.name}}
+{% endblock title %}
+
+
+{% block content %}
+   <h1>{{quiz.name}}</h1>
+
+    {% if attempted %}
+        <h1>You already attempted</h1>
+    {% else %}
+    <form method="POST" action="{% url 'quiz_submit' quiz.slug %}">
+        {%csrf_token %}
+    {% for question in  questions %}
+    
+        <p>Q{{forloop.counter}}.{{question.text}}</p>
+
+        <ul style="list-style-type: none">
+
+        {% for option in question.options.all %}
+            <li>
+                {{option.id}}
+                <input type="radio" id={{question.id}} name={{question.id}} value={{option.id}} />
+                <label for={{question.id}}>{{option.text}}</label>
+            </li>
+        {% endfor %}
+        </ul>   
+    
+    {% endfor %}
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+
+    {% endif %}
+    
+{% endblock content %}
