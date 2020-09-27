@@ -55,6 +55,7 @@ def QuizStartPage(request, slug):
     
 
 @login_required
+@profile_completion_required()
 def QuizSubmit(request, slug):
     user = request.user
     quiz = Quiz.objects.filter(slug=slug).first()

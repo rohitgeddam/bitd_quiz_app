@@ -33,11 +33,45 @@
     </tr>
 
     <tr>
-      <th scope="row">
+      <td colspan="2">
         <a href="{% url 'profile_update' %}" class="btn btn-warning">update</a>
-      </th>
+      </td>
       
     </tr>
   </tbody>
 </table>
+
+<table class="table table-bordered table-dark">
+ 
+  <tbody>
+    <tr>
+      <th scope="row">Total Quiz Participation</th>
+      <td>{{all_attempted_quizes.count}}</td>
+    </tr>
+    <tr>
+      <th scope="row">My Best Score</th>
+      <td>{{all_attempted_quizes.count}}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">My Best Rank</th>
+      <td>{{all_attempted_quizes.count}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>Quizes You Attempted </h1>
+{% for quiz_instance in all_attempted_quizes %}
+
+  
+  <div class="card">
+  <h5 class="card-header">{{quiz_instance.quiz.name}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">Score: {{quiz_instance.score}} </h5>
+    <p class="card-text">Rank: {{1}}</p>
+    <a href="{% url 'quiz_start' quiz_instance.quiz.slug%}" class="btn btn-primary">Check Your Response Response</a>
+  </div>
+</div>
+  
+{% endfor %}
 {% endblock content %}
