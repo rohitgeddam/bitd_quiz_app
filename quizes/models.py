@@ -2,13 +2,17 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from slugify import slugify
 from django.urls import reverse
+from django.utils import timezone
+
 # Create your models here.
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    allowed_time = models.DurationField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    # allowed_time = models.DurationField()
     roll_out = models.BooleanField(default=False)
 
     class Meta:

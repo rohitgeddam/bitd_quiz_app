@@ -5,21 +5,26 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 
-from .decorators import profile_completion_required
+from .decorators import profile_completion_required, quiz_started
+from django.utils import timezone
 
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Q
 # Create your views here.
 
-class HomePageView(ListView):
-    model = Quiz
-    context_object_name = 'quiz_list'
-    
-    template_name = 'home.html'
-
-    queryset = Quiz.objects.filter(roll_out=True)
+def HomePageView(request):
+    on_going_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__lte=timezone.now()) & Q(end_time__gte=timezone.now()))
+    up_comming_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__gte=timezone.now()))
+    past_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(end_time__lte=timezone.now()))
+    context = {
+        "on_going_quiz": on_going_quiz,
+        "upcomming_quiz": up_comming_quiz,
+        "past_quiz": past_quiz,
+    }
+    return render(request, "home.html", context)
 
 @login_required
 @profile_completion_required()
+@quiz_started()
 def QuizStartPage(request, slug):
     quiz = Quiz.objects.filter(slug=slug).first()
     questions = quiz.questions.all()
@@ -59,6 +64,7 @@ def QuizStartPage(request, slug):
 
 @login_required
 @profile_completion_required()
+@quiz_started()
 def QuizSubmit(request, slug):
     user = request.user
     quiz = Quiz.objects.filter(slug=slug).first()
@@ -133,4 +139,13 @@ def leaderboard(request):
         "top_scorers": top_scorers,
     }
     return render(request, "leaderboard.html", context)
-    
+
+def quiz_leaderboard(request, slug):
+    quiz = Quiz.objects.filter(slug=slug).first()
+    top_scorers = QuizTaker.objects.filter(quiz=quiz).order_by("-score")[:10]
+
+    context = {
+        "top_scorers": top_scorers,
+        "quiz": quiz,
+    }
+    return render(request,'quiz_leaderboard.html', context)

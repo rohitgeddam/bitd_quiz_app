@@ -60,6 +60,7 @@
   </tbody>
 </table>
 
+{% if all_attempted_quizes|length > 0 %}
 <h1>Quizes I Attempted </h1>
 {% for quiz_instance in all_attempted_quizes %}
 
@@ -72,6 +73,12 @@
     <a href="{% url 'quiz_start' quiz_instance.quiz.slug%}" class="btn btn-primary">Check Your Response</a>
   </div>
 </div>
-  
+
 {% endfor %}
+
+
+{% else %}
+  <p class="text-muted">You haven't participated in any quiz till now!!</p>
+{% endif %}
+  
 {% endblock content %}

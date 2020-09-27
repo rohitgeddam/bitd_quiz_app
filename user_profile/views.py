@@ -31,7 +31,7 @@ def profile_update_view(request):
         instance = form.save(commit=False)
         instance.completed_profile = True
         instance.save()
-        return render(request, 'quiz_start.html')
+        return redirect(reverse_lazy("profile_list"))
     context = {
         "form": form,
     }

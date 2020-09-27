@@ -14,7 +14,7 @@ class QuestionAdmin(nested_admin.NestedStackedInline):
     
 
 class QuizAdmin(nested_admin.NestedModelAdmin):
-    list_display = ['name', 'allowed_time', 'roll_out']
+    list_display = ['name', 'start_time', 'end_time', 'roll_out']
     prepopulated_fields = {"slug": ('name',),}
     inlines = [QuestionAdmin]
 
