@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 
 from .decorators import profile_completion_required
 
-from django.db.models import Count
+from django.db.models import Count, Sum
 # Create your views here.
 
 class HomePageView(ListView):
@@ -123,12 +123,14 @@ def QuizSubmit(request, slug):
         return redirect(reverse_lazy("quiz_start",args=(quiz.slug,)))
 
 def leaderboard(request):
-    # top_scores = ?
-    top_participations = get_user_model().objects.annotate(quiz_count=Count("quiz_takers")).order_by('-quiz_count')[:10]
+    user_model = get_user_model()
+
+    top_scorers = user_model.objects.annotate(quiz_count=Count("quiz_takers"),score=Sum("quiz_takers__score")).order_by("-quiz_count","-score")[:10]
+    top_participations = user_model.objects.annotate(quiz_count=Count("quiz_takers")).order_by('-quiz_count')[:10]
 
     context = {
         "top_participations": top_participations,
-        
+        "top_scorers": top_scorers,
     }
     return render(request, "leaderboard.html", context)
     
