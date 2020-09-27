@@ -12,13 +12,18 @@
 {% endblock head %}
 
 {% block content %}
-
+<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
 <div id="quiz-app">
 
   {{remaining_time_sec|json_script:"time_remaining"}}
-  <h1>[[formated_date]]</h1>
+  {% if remaining_time_sec >= 0%}
+  
 
-  <h1>{{quiz.name}}</h1>
+  <h1 style="text-align: center;">[[formated_date]]</h1>
+
+  {% endif %}
+
+  <h1 style="text-align: center; margin:50px 0;">Quiz - {{quiz.name}}</h1>
 
     {% if attempted %}
         
@@ -59,10 +64,12 @@
     <form method="POST" action="{% url 'quiz_submit' quiz.slug %}" >
         {%csrf_token %}
     {% for question in  questions %}
-    
-        <p>Q{{forloop.counter}}.{{question.text}}</p>
-
-        <ul style="list-style-type: none">
+      <div class="card">
+  <div class="card-header">
+    Q{{forloop.counter}}. <b>{{question.text}}</b>
+  </div>
+  <div class="card-body">
+   <ul style="list-style-type: none">
 
         {% for option in question.options.all %}
             <li>
@@ -72,20 +79,28 @@
             </li>
         {% endfor %}
         </ul>   
+  </div>
+</div>
+
+
+       
     
     {% endfor %}
-    <button type="submit" class="btn btn-primary" ref="vue_submit">Submit</button>
+    <button type="submit" class="btn btn-primary" ref="vue_submit" style="margin:20px 0; width:100%">Submit</button>
     </form>
 
     {% endif %}
 </div>
  
-    
+  </div>
 {% endblock content %}
 
 {% block script %}
  {% comment %} development vue {% endcomment %}
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> {% endcomment %}
+  {% comment %} production vue {% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
   <script src="{% static 'js/quiz_app.js' %}"></script>

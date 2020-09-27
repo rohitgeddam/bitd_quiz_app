@@ -9,7 +9,8 @@ All Quiz
 
 
 {% block content %}
-{% if on_going_quiz|length > 0 %}
+    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
+    {% if on_going_quiz|length > 0 %}
 
 <div style="margin:50px 0">
 <h1>Ongoing Quizes</h1>
@@ -70,6 +71,7 @@ All Quiz
 {% else %}
 <p class="text-muted">No upcomming quizes for now. We will have new quizes soon.</p>
 {% endif %}
+    </div>
 
 
 {% endblock content %}

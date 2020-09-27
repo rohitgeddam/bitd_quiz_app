@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
+
     <form action="" method="post">
 
     {% csrf_token %}
@@ -9,4 +11,8 @@
     <input type="submit" value="Sign Up" class="btn btn-primary">
     
     </form>
-{% endblock content %}{
+</div>
+
+
+
+{% endblock content %}
