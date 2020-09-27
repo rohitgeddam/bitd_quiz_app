@@ -17,7 +17,7 @@ All Quiz
 {% for quiz in  on_going_quiz %}
 <div class="card w-100" style="margin: 20px 0">
     <div class="card-body">
-        <h5 class="card-title">{{quiz.name}}</h5>
+        <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
         <p>Started On: {{quiz.start_time}}</p>
         <p>Ends On: {{quiz.end_time}}</p>
@@ -39,7 +39,7 @@ All Quiz
 {% for quiz in  upcomming_quiz %}
 <div class="card w-100" style="margin: 20px 0">
     <div class="card-body">
-        <h5 class="card-title">{{quiz.name}}</h5>
+        <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
         <p>Starts On: {{quiz.start_time}}</p>
         {% comment %} <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a> {% endcomment %}
@@ -59,7 +59,7 @@ All Quiz
 {% for quiz in  past_quiz %}
 <div class="card w-100" style="margin: 20px 0">
     <div class="card-body">
-        <h5 class="card-title">{{quiz.name}}</h5>
+        <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
         <p>Ended On: {{quiz.end_time}}</p>
         <a class="btn btn-warning" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>

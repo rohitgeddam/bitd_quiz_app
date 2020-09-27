@@ -7,9 +7,6 @@
     {{quiz.name}}
 {% endblock title %}
 
-{% block head %}
-
-{% endblock head %}
 
 {% block content %}
 <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
@@ -18,9 +15,16 @@
   {{remaining_time_sec|json_script:"time_remaining"}}
   {% if remaining_time_sec >= 0%}
   
-
+  <div class="timer">
   <h1 style="text-align: center;">[[formated_date]]</h1>
-
+  </div>
+  <div class="quiz-instructions text-muted">
+    <ul>
+    <li>Do Not Reload The Page.</li>
+    <li>Do Not Click On Back Button.</li>
+    <li>Your Response will be automatically submited once timer ends.</li>
+    </ul>
+  </div>
   {% endif %}
 
   <h1 style="text-align: center; margin:50px 0;">Quiz - {{quiz.name}}</h1>
