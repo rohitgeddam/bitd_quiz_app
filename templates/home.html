@@ -4,62 +4,72 @@
 
 
 {% block title %}
-    All Quiz
+All Quiz
 {% endblock title %}
 
 
 {% block content %}
 {% if on_going_quiz|length > 0 %}
+
+<div style="margin:50px 0">
 <h1>Ongoing Quizes</h1>
-    {% for quiz in  on_going_quiz %}
-    <div class="card w-100">
-        <div class="card-body">
-            <h5 class="card-title">{{quiz.name}}</h5>
-            <p class="card-text">{{quiz.description}}</p>
-            <p>Started On: {{quiz.start_time}}</p>
-            <p>Ends On: {{quiz.end_time}}</p>
-            <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a>
-        </div>
+{% for quiz in  on_going_quiz %}
+<div class="card w-100" style="margin: 20px 0">
+    <div class="card-body">
+        <h5 class="card-title">{{quiz.name}}</h5>
+        <p class="card-text">{{quiz.description}}</p>
+        <p>Started On: {{quiz.start_time}}</p>
+        <p>Ends On: {{quiz.end_time}}</p>
+        <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
+</div>
 
-    {% else %}
-        <p class="text-muted">There are no ongoing quizes.</p>
-    {% endif %}
-    
+{% else %}
+<p class="text-muted">There are no ongoing quizes.</p>
+{% endif %}
+
+
+
+<div  style="margin:50px 0">
 {% if upcomming_quiz|length > 0 %}
-    <h1>Upcomming Quizes</h1>
-     {% for quiz in  upcomming_quiz %}
-    <div class="card w-100">
-        <div class="card-body">
-            <h5 class="card-title">{{quiz.name}}</h5>
-            <p class="card-text">{{quiz.description}}</p>
-            <p>Starts On: {{quiz.start_time}}</p>
-            {% comment %} <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a> {% endcomment %}
-        </div>
+<h1>Upcomming Quizes</h1>
+{% for quiz in  upcomming_quiz %}
+<div class="card w-100" style="margin: 20px 0">
+    <div class="card-body">
+        <h5 class="card-title">{{quiz.name}}</h5>
+        <p class="card-text">{{quiz.description}}</p>
+        <p>Starts On: {{quiz.start_time}}</p>
+        {% comment %} <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a> {% endcomment %}
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
+</div>
 
-    {% else %}
-        <p class="text-muted">No upcomming quizes for now. We will have new quizes soon.</p>
-    {% endif %}
+{% else %}
+<p class="text-muted">No upcomming quizes for now. We will have new quizes soon.</p>
+{% endif %}
+
+<div  style="margin:50px 0">
 
 {% if past_quiz|length > 0 %}
-    <h1>Past Quizes</h1>
-     {% for quiz in  past_quiz %}
-    <div class="card w-100">
-        <div class="card-body">
-            <h5 class="card-title">{{quiz.name}}</h5>
-            <p class="card-text">{{quiz.description}}</p>
-            <p>Ended On: {{quiz.end_time}}</p>
-            <a class="btn btn-warning" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>
-        </div>
+<h1>Past Quizes</h1>
+{% for quiz in  past_quiz %}
+<div class="card w-100" style="margin: 20px 0">
+    <div class="card-body">
+        <h5 class="card-title">{{quiz.name}}</h5>
+        <p class="card-text">{{quiz.description}}</p>
+        <p>Ended On: {{quiz.end_time}}</p>
+        <a class="btn btn-warning" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
+</div>
 
-    {% else %}
-        <p class="text-muted">No upcomming quizes for now. We will have new quizes soon.</p>
-    {% endif %}
+{% else %}
+<p class="text-muted">No upcomming quizes for now. We will have new quizes soon.</p>
+{% endif %}
 
 
 {% endblock content %}
