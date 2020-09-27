@@ -19,7 +19,8 @@
 
   <!-- Custom styles for this template -->
   <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
-
+  {% block head %}
+  {% endblock head %}
 </head>
 
 <body>
@@ -77,6 +78,10 @@
   <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
+
+ {% block script %}
+ {% endblock script %}
+  
   <!-- Menu Toggle Script -->
   <script>
     $("#menu-toggle").click(function(e) {

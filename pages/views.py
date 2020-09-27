@@ -30,7 +30,7 @@ def QuizStartPage(request, slug):
     questions = quiz.questions.all()
     attempted = QuizTaker.objects.filter(user=request.user.id,quiz=quiz.id).count() > 0
     user = request.user
-  
+    remaining_time_sec = int((quiz.end_time - timezone.now()).total_seconds())
     
     if(attempted):
         score = QuizTaker.objects.filter(user=user, quiz=quiz).first().score
@@ -59,7 +59,7 @@ def QuizStartPage(request, slug):
         return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted,"responses": user_response, "score":score})
           
 
-    return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted,})
+    return render(request, 'quiz_start.html', {"quiz": quiz, "questions":questions, "attempted":  attempted, "remaining_time_sec":remaining_time_sec})
     
 
 @login_required

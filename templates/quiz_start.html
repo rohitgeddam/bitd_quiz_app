@@ -7,9 +7,18 @@
     {{quiz.name}}
 {% endblock title %}
 
+{% block head %}
+
+{% endblock head %}
 
 {% block content %}
-   <h1>{{quiz.name}}</h1>
+
+<div id="quiz-app">
+
+  {{remaining_time_sec|json_script:"time_remaining"}}
+  <h1>[[formated_date]]</h1>
+
+  <h1>{{quiz.name}}</h1>
 
     {% if attempted %}
         
@@ -47,7 +56,7 @@
 
 
     {% else %}
-    <form method="POST" action="{% url 'quiz_submit' quiz.slug %}">
+    <form method="POST" action="{% url 'quiz_submit' quiz.slug %}" >
         {%csrf_token %}
     {% for question in  questions %}
     
@@ -65,9 +74,19 @@
         </ul>   
     
     {% endfor %}
-    <input type="submit" value="Submit" class="btn btn-primary"/>
+    <button type="submit" class="btn btn-primary" ref="vue_submit">Submit</button>
     </form>
 
     {% endif %}
+</div>
+ 
     
 {% endblock content %}
+
+{% block script %}
+ {% comment %} development vue {% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+  <script src="{% static 'js/quiz_app.js' %}"></script>
+{% endblock script %}
