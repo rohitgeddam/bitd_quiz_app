@@ -1,0 +1,33 @@
+{% extends '_base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Leader Board
+{% endblock title %}
+
+
+{% block content %}
+    <h1> Leader Board </h1>
+ <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>UserName</th>
+      <th>Total Quizes Participated In</th>
+    </tr>  
+  </thead>
+  <tbody>
+  {% for user in top_participations %}
+  
+    <tr>
+      <th scope="row">{{user.username}}</th>
+      <td style="text-align: center">{{user.quiz_count}}</td>
+    </tr>  
+  {% endfor %}
+  
+   
+  </tbody>
+</table> 
+
+{% endblock content %}

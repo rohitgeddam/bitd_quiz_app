@@ -50,17 +50,17 @@
     </tr>
     <tr>
       <th scope="row">My Best Score</th>
-      <td>{{all_attempted_quizes.count}}</td>
+      <td>N/A</td>
     </tr>
 
     <tr>
       <th scope="row">My Best Rank</th>
-      <td>{{all_attempted_quizes.count}}</td>
+      <td>N/A</td>
     </tr>
   </tbody>
 </table>
 
-<h1>Quizes You Attempted </h1>
+<h1>Quizes I Attempted </h1>
 {% for quiz_instance in all_attempted_quizes %}
 
   
@@ -69,7 +69,7 @@
   <div class="card-body">
     <h5 class="card-title">Score: {{quiz_instance.score}} </h5>
     <p class="card-text">Rank: {{1}}</p>
-    <a href="{% url 'quiz_start' quiz_instance.quiz.slug%}" class="btn btn-primary">Check Your Response Response</a>
+    <a href="{% url 'quiz_start' quiz_instance.quiz.slug%}" class="btn btn-primary">Check Your Response</a>
   </div>
 </div>
   

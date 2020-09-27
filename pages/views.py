@@ -3,8 +3,11 @@ from django.views.generic import ListView
 from quizes.models import Quiz, QuizTaker, Response, Option
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 
 from .decorators import profile_completion_required
+
+from django.db.models import Count
 # Create your views here.
 
 class HomePageView(ListView):
@@ -118,3 +121,14 @@ def QuizSubmit(request, slug):
         Response.objects.bulk_create(responses)
        
         return redirect(reverse_lazy("quiz_start",args=(quiz.slug,)))
+
+def leaderboard(request):
+    # top_scores = ?
+    top_participations = get_user_model().objects.annotate(quiz_count=Count("quiz_takers")).order_by('-quiz_count')[:10]
+
+    context = {
+        "top_participations": top_participations,
+        
+    }
+    return render(request, "leaderboard.html", context)
+    
