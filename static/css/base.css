@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Libre Baskerville', serif;
+    /* font-family: 'Libre Baskerville', serif; */
 
 }
 
@@ -13,12 +13,18 @@ h1{
 
 
 .quiz-instructions{
-    padding:50px;
-    box-shadow: 0 10px 5px rgba(0,0,0,0.4);
+    padding:40px;
+    box-shadow: 0 0px 5px rgba(0,0,0,0.4);
+    margin: 20px 0;
+    font-family: 'Libre Baskerville', serif;
+
 }
 
 .profile_page{
     width:100%;
+    /* font-family: 'Libre Baskerville', serif; */
+    font-weight: 100px;
+    
     background: url("/static/img/profile_background.svg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,7 +32,8 @@ h1{
 
 .sidebar {
     color: white;
-    font-family: 'Roboto Mono', monospace;
+ 
+    font-family: 'Libre Baskerville', serif;
     background-image: url("/static/img/sidebar-5.jpg");
     background-repeat: no-repeat;
     background-size:cover;
@@ -36,13 +43,14 @@ h1{
 
 .login-box{
 
-    
+    font-family: 'Libre Baskerville', serif;
     box-shadow: 2px 5px 10px rgba(0,0,0,0.7);
     padding: 20px;
     margin: 50px 0;
 }
 
 .login-box input[type="submit"]{
+    font-family: 'Libre Baskerville', serif;
     width: 100%;
 }
 
@@ -51,11 +59,14 @@ h1{
     bottom:0;
     font-size: 16px;
     color: grey;
+    left: 20px;
+    font-weight: bold;
+    
 }
 
 .timer{
     /* text-align:center; */
-    text-shadow: 0 2px 3px;
+    font-weight: lighter;
     z-index: 100;
     font-weight: bold;
     font-size: 2em;
@@ -65,4 +76,17 @@ h1{
     right: 0;
     color: #132743;
     padding: 10px;
+    font-family: monospace Arial sans-serif;
+}
+
+#quiz-app{
+    font-family: "Roboto", Arial;
+    font-weight: lighter;
+    
+}
+
+.quiz_title{
+    font-family: 'Libre Baskerville', serif;
+
+    text-align: center; margin:50px 0;
 }
