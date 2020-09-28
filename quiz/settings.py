@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms',
     'nested_admin',
-
+    'ckeditor',
     # user apps,
     'users.apps.UsersConfig',
     'user_profile',

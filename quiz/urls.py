@@ -21,5 +21,6 @@ urlpatterns = [
     path('profile/', include("user_profile.urls")),
     path('nested_admin/', include('nested_admin.urls')),
     path('accounts/', include('allauth.urls')),
+
     path('', include('pages.urls'))
 ]

@@ -3,12 +3,13 @@ from django.contrib.auth import get_user_model
 from slugify import slugify
 from django.urls import reverse
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     created_on = models.DateTimeField(auto_now_add=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -32,7 +33,7 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, related_name='questions', on_delete=models.CASCADE)
     
-    text = models.CharField(max_length=1000)
+    text = RichTextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now = True)
 
@@ -41,7 +42,7 @@ class Question(models.Model):
     
 class Option(models.Model):
     question = models.ForeignKey(Question, related_name='options',  on_delete=models.CASCADE)
-    text = models.CharField(max_length=1000)
+    text = RichTextField()
     is_answer = models.BooleanField(default=False)
 
     def __str__(self):
