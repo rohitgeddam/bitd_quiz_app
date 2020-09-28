@@ -9,7 +9,15 @@ from .decorators import profile_completion_required, quiz_started
 from django.utils import timezone
 
 from django.db.models import Count, Sum, Q
+
+from django.core.cache import cache
+import time
 # Create your views here.
+
+
+GLOBAL_LEADERBOARD_SCORE= 'gleaderboard.scores'
+GLOBAL_LEADERBOARD_PARTICIPANTS= 'gleaderboard.participants'
+
 
 def HomePageView(request):
     on_going_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__lte=timezone.now()) & Q(end_time__gte=timezone.now()))
@@ -125,25 +133,43 @@ def QuizSubmit(request, slug):
         )
 
         Response.objects.bulk_create(responses)
-       
+        cache.delete(GLOBAL_LEADERBOARD_SCORE)
+        cache.delete(GLOBAL_LEADERBOARD_PARTICIPANTS)
         return redirect(reverse_lazy("quiz_start",args=(quiz.slug,)))
+
+
 
 def leaderboard(request):
     user_model = get_user_model()
 
-    top_scorers = user_model.objects.annotate(quiz_count=Count("quiz_takers"),score=Sum("quiz_takers__score")).order_by("-quiz_count","-score")[:10]
-    top_participations = user_model.objects.annotate(quiz_count=Count("quiz_takers")).order_by('-quiz_count')[:10]
+    top_scores = cache.get(GLOBAL_LEADERBOARD_SCORE)
+    if not top_scores:
+        top_scorers = user_model.objects.annotate(quiz_count=Count("quiz_takers"),score=Sum("quiz_takers__score")).order_by("-quiz_count","-score")[:10]
+        cache.set(GLOBAL_LEADERBOARD_SCORE, top_scorers)
+    
+    top_participations = cache.get(GLOBAL_LEADERBOARD_PARTICIPANTS)
+    if not top_participations:
 
+        top_participations = user_model.objects.annotate(quiz_count=Count("quiz_takers")).order_by('-quiz_count')[:10]
+        cache.set(GLOBAL_LEADERBOARD_PARTICIPANTS, top_participations)
+        
     context = {
         "top_participations": top_participations,
         "top_scorers": top_scorers,
     }
     return render(request, "leaderboard.html", context)
 
+
+
+
 def quiz_leaderboard(request, slug):
     quiz = Quiz.objects.filter(slug=slug).first()
-    top_scorers = QuizTaker.objects.filter(quiz=quiz).order_by("-score")[:10]
 
+    top_scorers = cache.get(f'quiz-{slug}')
+    if not top_scorers:
+        top_scorers = QuizTaker.objects.filter(quiz=quiz).order_by("-score")[:10]
+        cache.set(f'quiz-{slug}', top_scorers)
+        
     context = {
         "top_scorers": top_scorers,
         "quiz": quiz,
