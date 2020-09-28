@@ -10,6 +10,7 @@ class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     description = RichTextField()
+    created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

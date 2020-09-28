@@ -17,7 +17,12 @@ class QuestionAdmin(nested_admin.NestedStackedInline):
 class QuizAdmin(nested_admin.NestedModelAdmin):
     list_display = ['name', 'start_time', 'end_time', 'roll_out']
     prepopulated_fields = {"slug": ('name',),}
+    exclude = ['created_by',]
     inlines = [QuestionAdmin]
+
+    def save_model(self, request, obj, form, change):
+        obj.created_by = request.user
+        super(QuizAdmin, self).save_model(request, obj, form, change)
 
 
 admin.site.register(Quiz, QuizAdmin)
