@@ -8,16 +8,13 @@ from .models import Question, Quiz, Option, QuizTaker, Response
 class OptionAdmin(nested_admin.NestedTabularInline):
     model = Option
     extra = 0
-    class Media:
-       js = ('ckeditor/ckeditor/ckeditor.js')
+    
 
 class QuestionAdmin(nested_admin.NestedStackedInline):
     model = Question
     inlines = [OptionAdmin]
     extra = 0
-    class Media:
-        js = ('ckeditor/ckeditor/ckeditor.js')
-
+   
 class QuizAdmin(nested_admin.NestedModelAdmin):
     list_display = ['name', 'start_time', 'end_time', 'roll_out']
     prepopulated_fields = {"slug": ('name',),}
