@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -60,6 +61,8 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -153,6 +156,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 # required by allauth
 SITE_ID = 1
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
@@ -166,14 +170,18 @@ ACCOUNT_AUTHENTICATION_METHOD  = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = True
+
 
 DEFAULT_FROM_EMAIL = 'bitdsc@gmail.com'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'X'
-EMAIL_HOST_PASSWORD = 'X' #past the key or password app here
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = '' #past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
