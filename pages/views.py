@@ -142,8 +142,8 @@ def QuizSubmit(request, slug):
 def leaderboard(request):
     user_model = get_user_model()
 
-    top_scores = cache.get(GLOBAL_LEADERBOARD_SCORE)
-    if not top_scores:
+    top_scorers = cache.get(GLOBAL_LEADERBOARD_SCORE)
+    if not top_scorers:
         top_scorers = user_model.objects.annotate(quiz_count=Count("quiz_takers"),score=Sum("quiz_takers__score")).order_by("-quiz_count","-score")[:10]
         cache.set(GLOBAL_LEADERBOARD_SCORE, top_scorers)
     

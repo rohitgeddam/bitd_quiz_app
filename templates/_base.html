@@ -38,7 +38,7 @@
         {% if user.is_authenticated %}
         <h5 class="list-group-item list-group-item-action bg-light">Welcome {{user.username}}</h5>
         <a href="/" class="list-group-item list-group-item-action bg-light">Quizes</a>
-        <a href="{% url 'leaderboard' %}" class="list-group-item list-group-item-action bg-light">Leader Board</a>
+          <a href="{% url 'leaderboard' %}" class="list-group-item list-group-item-action bg-light">Leader Board</a>
           <a href="{% url 'profile_list'%}" class="list-group-item list-group-item-action bg-light">My Profile</a>
           <a href="{% url 'account_logout'%}" class="list-group-item list-group-item-action bg-light">Logout</a>
         {% else %}
