@@ -32,13 +32,18 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'abcd')
 # DEBUG = True
 DEBUG = int(os.getenv("DEBUG", default=1))
 
-if not DEBUG:
-    import django_heroku
-else:
-    from dotenv import load_dotenv
-    dotenv_path  = os.path.join(BASE_DIR, ".env")
-    load_dotenv(dotenv_path)
+# if not DEBUG:
+#     import django_heroku
+# else:
+#     from dotenv import load_dotenv
+#     dotenv_path  = os.path.join(BASE_DIR, ".env")
+#     load_dotenv(dotenv_path)
     
+
+import django_heroku
+from dotenv import load_dotenv
+dotenv_path  = os.path.join(BASE_DIR, ".env")
+load_dotenv(dotenv_path)
 
 ALLOWED_HOSTS = ["*",]
 
@@ -198,9 +203,13 @@ EMAIL_USE_TLS = True
 
 
 
-if not DEBUG:
-    # Activate Django-Heroku.
-    django_heroku.settings(locals())
+# if not DEBUG:
+#     # Activate Django-Heroku.
+#     django_heroku.settings(locals())
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 if not DEBUG:
     servers = os.environ['MEMCACHIER_SERVERS']
