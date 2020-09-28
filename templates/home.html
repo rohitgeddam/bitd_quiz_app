@@ -9,11 +9,13 @@ All Quiz
 
 
 {% block content %}
+{% autoescape off %}
     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
     {% if on_going_quiz|length > 0 %}
 
 <div style="margin:50px 0">
 <h1>Ongoing Quizes</h1>
+
 {% for quiz in  on_going_quiz %}
 <div class="card w-100" style="margin: 20px 0">
     <div class="card-body">
@@ -73,5 +75,5 @@ All Quiz
 {% endif %}
     </div>
 
-
+{% endautoescape %}
 {% endblock content %}

@@ -16,7 +16,7 @@
   {% if remaining_time_sec >= 0%}
   
   <div class="timer">
-  <h1 style="text-align: center;">[[formated_date]]</h1>
+    <p>[[formated_date]]</p>
   </div>
   <div class="quiz-instructions text-muted">
     <ul>
@@ -30,7 +30,7 @@
   <h1 style="text-align: center; margin:50px 0;">Quiz - {{quiz.name}}</h1>
 
     {% if attempted %}
-        
+        {% autoescape off %}
         <h2>Your Response</h2>
         <p>Total Score - {{score}}</p>
         <div class="table-responsive">
@@ -62,9 +62,10 @@
   </tbody>
 </table>
  </div>
-
+  {% endautoescape %}
 
     {% else %}
+    {% autoescape off %}
     <form method="POST" action="{% url 'quiz_submit' quiz.slug %}" >
         {%csrf_token %}
     {% for question in  questions %}
@@ -74,14 +75,14 @@
   </div>
   <div class="card-body">
    <ul style="list-style-type: none">
-
+        
         {% for option in question.options.all %}
             <li>
-                
                 <input type="radio" id={{question.id}} name={{question.id}} value={{option.id}} />
                 <label for={{question.id}}>{{option.text}}</label>
             </li>
         {% endfor %}
+          
         </ul>   
   </div>
 </div>
@@ -92,7 +93,7 @@
     {% endfor %}
     <button type="submit" class="btn btn-primary" ref="vue_submit" style="margin:20px 0; width:100%">Submit</button>
     </form>
-
+{% endautoescape %}
     {% endif %}
 </div>
  

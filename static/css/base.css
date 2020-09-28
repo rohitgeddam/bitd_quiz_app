@@ -11,11 +11,6 @@ h1{
 }
 
 
-.timer{
-    /* border: 1px solid black; */
-    padding:20px;
-    box-shadow: 0 10px 5px rgba(0,0,0,0.4);
-}
 
 .quiz-instructions{
     padding:50px;
@@ -56,4 +51,18 @@ h1{
     bottom:0;
     font-size: 16px;
     color: grey;
+}
+
+.timer{
+    /* text-align:center; */
+    text-shadow: 0 2px 3px;
+    z-index: 100;
+    font-weight: bold;
+    font-size: 2em;
+    position: fixed;
+    top: 0px;
+    /* left: auto; */
+    right: 0;
+    color: #132743;
+    padding: 10px;
 }
