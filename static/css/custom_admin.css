@@ -33,16 +33,10 @@ body{
     font-size: 16px;
 }
 
-body{
-    /* background: url('/static/img/full-screen-image-3.jpg');
-    background-repeat: no-repeat;
-    background-size: cover; */
-    background: #0278ae;
-    
-}
+
 
 .content p a{
-    color: white;
+    color: black;
 }
 
 div.breadcrumbs{
