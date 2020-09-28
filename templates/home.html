@@ -21,8 +21,9 @@ All Quiz
     <div class="card-body">
         <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
-        <p>Started On: {{quiz.start_time}}</p>
-        <p>Ends On: {{quiz.end_time}}</p>
+        <hr>
+        <p>Started On:<b>{{quiz.start_time}}</b></p>
+        <p>Ends On: <b>{{quiz.end_time}}</b></p>
         <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a>
     </div>
 </div>
@@ -43,7 +44,8 @@ All Quiz
     <div class="card-body">
         <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
-        <p>Starts On: {{quiz.start_time}}</p>
+        <hr>
+        <p>Starts On: <b>{{quiz.start_time}}</b></p>
         {% comment %} <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a> {% endcomment %}
     </div>
 </div>
@@ -63,7 +65,8 @@ All Quiz
     <div class="card-body">
         <h5 class="card-title"><b>{{quiz.name}}</b></h5>
         <p class="card-text">{{quiz.description}}</p>
-        <p>Ended On: {{quiz.end_time}}</p>
+        <hr>
+        <p>Ended On: <b>{{quiz.end_time}}</b></p>
         <a class="btn btn-warning" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>
     </div>
 </div>

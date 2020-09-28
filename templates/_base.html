@@ -16,6 +16,7 @@
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' type='image/x-icon' %}">
 
   <!-- Custom styles for this template -->
   <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
@@ -32,9 +33,12 @@
     <!-- Sidebar -->
 
     <div class="bg-light border-right sidebar" id="sidebar-wrapper">
-      <div class="sidebar-heading">DSC x QUIZ</div>
+      <img class="sidebar-bg" src="{% static 'img/sidebar-2.jpg'%}">
+
+      </img>
+      
       <div class="list-group list-group-flush">
-        
+        <div class="sidebar-heading">DSC x QUIZ</div>
         {% if user.is_authenticated %}
         <h5 class="list-group-item list-group-item-action bg-light">Welcome {{user.username}}</h5>
         <a href="/" class="list-group-item list-group-item-action bg-light">Quizes</a>
@@ -51,7 +55,7 @@
     </div>
     <div class="me">
     
-      <p>MIT Licence Rohit Geddam</p>
+      <p>MIT Licence@Rohit Geddam</p>
     </div>
     <!-- /#sidebar-wrapper -->
 
