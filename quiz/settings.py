@@ -23,12 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-hra8=#i_z&m-t2bs_&^tqvc%6uelv=t4dm7#4fhw_sp04dta)'
+# SECRET_KEY = '-hra8=#i_z&m-t2bs_&^tqvc%6uelv=t4dm7#4fhw_sp04dta)'
+SECRET_KEY = os.getenv("SECRET_KEY", 'abcd')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = int(os.getenv("DEBUG", default=1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -49,11 +52,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms',
     'nested_admin',
+
     # user apps,
     'users.apps.UsersConfig',
     'user_profile',
     'pages.apps.PagesConfig',
     'quizes.apps.QuizesConfig',
+
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -177,11 +182,58 @@ DEFAULT_FROM_EMAIL = 'bitdsc@gmail.com'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = '' #past the key or password app here
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER','')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD','') #past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+def get_cache():
+  import os
+  try:
+    servers = os.environ['MEMCACHIER_SERVERS']
+    username = os.environ['MEMCACHIER_USERNAME']
+    password = os.environ['MEMCACHIER_PASSWORD']
+    return {
+      'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        # TIMEOUT is not the connection timeout! It's the default expiration
+        # timeout that should be applied to keys! Setting it to `None`
+        # disables expiration.
+        'TIMEOUT': None,
+        'LOCATION': servers,
+        'OPTIONS': {
+          'binary': True,
+          'username': username,
+          'password': password,
+          'behaviors': {
+            # Enable faster IO
+            'no_block': True,
+            'tcp_nodelay': True,
+            # Keep connection alive
+            'tcp_keepalive': True,
+            # Timeout settings
+            'connect_timeout': 2000, # ms
+            'send_timeout': 750 * 1000, # us
+            'receive_timeout': 750 * 1000, # us
+            '_poll_timeout': 2000, # ms
+            # Better failover
+            'ketama': True,
+            'remove_failed': 1,
+            'retry_timeout': 2,
+            'dead_timeout': 30,
+          }
+        }
+      }
+    }
+  except:
+    return {
+      'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+      }
+    }
+
+CACHES = get_cache()
