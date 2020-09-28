@@ -43,7 +43,7 @@
         {% if user.is_authenticated %}
         <h5 class="list-group-item list-group-item-action bg-light">Welcome {{user.username}}</h5>
         {% if request.user|has_group:"quizmaster" %} 
-            <a href="admin/" class="list-group-item list-group-item-action bg-light">Admin Panel</a>
+            <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action bg-light">Admin Panel</a>
         
         {% endif %}
 
