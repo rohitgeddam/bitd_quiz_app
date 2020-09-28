@@ -189,7 +189,7 @@ DEFAULT_FROM_EMAIL = 'bitdsc@gmail.com'
 
 
 # PROD USE SENDGRID
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
 EMAIL_HOST= 'smtp.sendgrid.net'
 EMAIL_PORT = 587
