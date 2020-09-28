@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +31,14 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'abcd')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = int(os.getenv("DEBUG", default=1))
+
+if not DEBUG:
+    import django_heroku
+else:
+    from dotenv import load_dotenv
+    dotenv_path  = os.path.join(BASE_DIR, ".env")
+    load_dotenv(dotenv_path)
+    
 
 ALLOWED_HOSTS = ["*",]
 
@@ -189,29 +198,30 @@ EMAIL_USE_TLS = True
 
 
 
+if not DEBUG:
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+if not DEBUG:
+    servers = os.environ['MEMCACHIER_SERVERS']
+    username = os.environ['MEMCACHIER_USERNAME']
+    password = os.environ['MEMCACHIER_PASSWORD']
 
-servers = os.environ['MEMCACHIER_SERVERS']
-username = os.environ['MEMCACHIER_USERNAME']
-password = os.environ['MEMCACHIER_PASSWORD']
+    CACHES = {
+        'default': {
+            # Use django-bmemcached
+            'BACKEND': 'django_bmemcached.memcached.BMemcached',
 
-CACHES = {
-    'default': {
-        # Use django-bmemcached
-        'BACKEND': 'django_bmemcached.memcached.BMemcached',
+            # TIMEOUT is not the connection timeout! It's the default expiration
+            # timeout that should be applied to keys! Setting it to `None`
+            # disables expiration.
+            'TIMEOUT': None,
 
-        # TIMEOUT is not the connection timeout! It's the default expiration
-        # timeout that should be applied to keys! Setting it to `None`
-        # disables expiration.
-        'TIMEOUT': None,
+            'LOCATION': servers,
 
-        'LOCATION': servers,
-
-        'OPTIONS': {
-            'username': username,
-            'password': password,
+            'OPTIONS': {
+                'username': username,
+                'password': password,
+            }
         }
     }
-}
