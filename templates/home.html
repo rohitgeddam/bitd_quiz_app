@@ -24,7 +24,7 @@ All Quiz
         <hr>
         <p>Started On:<b>{{quiz.start_time}}</b></p>
         <p>Ends On: <b>{{quiz.end_time}}</b></p>
-        <a class="btn btn-warning" href="{{quiz.get_absolute_url}}">Start Quiz</a>
+        <a class="btn btn-warning quiz-start-btn" href="{{quiz.get_absolute_url}}">Start Quiz</a>
     </div>
 </div>
 {% endfor %}
@@ -67,7 +67,7 @@ All Quiz
         <p class="card-text">{{quiz.description}}</p>
         <hr>
         <p>Ended On: <b>{{quiz.end_time}}</b></p>
-        <a class="btn btn-warning" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>
+        <a class="btn btn-dark quiz-leaderboard-btn" href="{% url 'quiz_leaderboard' quiz.slug%}">Quiz Leader Board</a>
     </div>
 </div>
 {% endfor %}
