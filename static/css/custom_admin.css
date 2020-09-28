@@ -38,6 +38,11 @@ body{
     background-repeat: no-repeat;
     background-size: cover; */
     background: #0278ae;
+    
+}
+
+.content p a{
+    color: white;
 }
 
 div.breadcrumbs{
@@ -56,3 +61,17 @@ div.breadcrumbs a{
 .djn-drag-handler b,span {
     color: #f08a5d;
 }
+
+
+.button, input[type=submit], input[type=button], a.button {
+    background: #f08a5d;
+
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+
+
+    
+}
+
