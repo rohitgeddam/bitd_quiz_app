@@ -135,8 +135,7 @@ def QuizSubmit(request, slug):
         Response.objects.bulk_create(responses)
         cache.delete(GLOBAL_LEADERBOARD_SCORE)
         cache.delete(GLOBAL_LEADERBOARD_PARTICIPANTS)
-        return redirect(reverse_lazy("quiz_start",args=(quiz.slug,)))
-
+        return redirect(reverse_lazy("home_page"))
 
 
 def leaderboard(request):

@@ -10,7 +10,14 @@ Leader Board
 
 {% block content %}
 <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto">
-    <h1> Leader Board </h1>
+
+    {% if quiz.quiz_takers.count <= 0 %}
+    <div class="alert alert-danger" role="alert">
+  It's Sad That no one has participated in this quiz.
+</div>
+
+    {% else %}
+ <h1> Leader Board </h1>
     <h2>Quiz - {{quiz.name}}</h2>
     <p>Total Participants: {{quiz.quiz_takers.count}}</p>
     <table class="table table-bordered">
@@ -31,6 +38,8 @@ Leader Board
 
     </tbody>
 </table>
+    {% endif %}
+   
     
 </div>
 

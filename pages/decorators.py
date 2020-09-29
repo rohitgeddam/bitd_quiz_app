@@ -28,3 +28,17 @@ def quiz_started():
            
         return wrap
     return decorator
+
+def quiz_ended():
+    def decorator(func):
+        def wrap(request, *args, **kwargs):
+        
+            quiz = Quiz.objects.filter(slug=kwargs.get("slug")).first()
+            if (quiz.end_time <= timezone.now()):
+            
+                return redirect(reverse_lazy("home_page"))
+            else:
+                return func(request, *args, **kwargs)
+           
+        return wrap
+    return decorator
