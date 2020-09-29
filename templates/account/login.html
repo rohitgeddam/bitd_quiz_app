@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
-
+{% load socialaccount %}
 
 {% block content %}
 <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 ml-auto mr-auto login-box">
@@ -10,5 +10,9 @@
     <a href="{% url 'account_reset_password' %}" >Forgot Password?</a>
     <input type="submit" value="Log In" class="btn btn-primary" style="margin:10px 0;">
     </form>
+    <a class="btn btn-danger google-btn" href="{% provider_login_url 'google' %}">Login with Google</a>
+
+    
+
 </div>
 {% endblock content %}{

@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     # 3rd party
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'crispy_forms',
     'nested_admin',
     'ckeditor',
@@ -174,7 +176,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 
 # required by allauth
-SITE_ID = 1
+SITE_ID = 2
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -234,3 +236,18 @@ if not DEBUG:
             }
         }
     }
+
+
+# social oauth
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
