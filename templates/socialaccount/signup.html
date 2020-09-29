@@ -1,5 +1,6 @@
 {% extends "socialaccount/base.html" %}
 {% load crispy_forms_tags %}
+
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
@@ -18,5 +19,7 @@
   {% endif %}
   <button type="submit" class="btn btn-danger">{% trans "Sign Up" %} &raquo;</button>
 </form>
+
+
 
 {% endblock %}

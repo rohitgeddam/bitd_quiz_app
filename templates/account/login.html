@@ -10,9 +10,9 @@
     <a href="{% url 'account_reset_password' %}" >Forgot Password?</a>
     <input type="submit" value="Log In" class="btn btn-primary" style="margin:10px 0;">
     </form>
-    <a class="btn btn-danger google-btn" href="{% provider_login_url 'google' %}">Login with Google</a>
-
-    
+    <hr>
+    <p style="text-align: center">or</p>
+    <a class="btn btn-lg btn-google btn-block text-uppercase btn-outline" href="{% provider_login_url 'google' %}"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup With Google</a> 
 
 </div>
 {% endblock content %}{

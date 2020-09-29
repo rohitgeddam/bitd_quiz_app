@@ -132,6 +132,16 @@ h1{
 
 }
 
-.google-btn{
+/* .google-btn{
+    border: 2px solid black;
+    background: rgba(238, 5, 5, 0.822);
     width: 100%;
+} */
+
+.btn-google {
+    color: #545454;
+    font-size: 16px;
+    font-family: monospace;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
 }
