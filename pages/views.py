@@ -20,9 +20,11 @@ GLOBAL_LEADERBOARD_PARTICIPANTS= 'gleaderboard.participants'
 
 
 def HomePageView(request):
-    on_going_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__lte=timezone.now()) & Q(end_time__gte=timezone.now()))
-    up_comming_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__gte=timezone.now()))
-    past_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(end_time__lte=timezone.now()))
+    on_going_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__lte=timezone.now()) & Q(end_time__gte=timezone.now())).order_by('-start_time')
+    
+    up_comming_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(start_time__gte=timezone.now())).order_by('start_time')
+    past_quiz = Quiz.objects.filter(Q(roll_out=True) & Q(end_time__lte=timezone.now())).order_by('-end_time')
+    
     context = {
         "on_going_quiz": on_going_quiz,
         "upcomming_quiz": up_comming_quiz,
