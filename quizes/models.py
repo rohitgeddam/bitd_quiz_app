@@ -4,7 +4,6 @@ from slugify import slugify
 from django.urls import reverse
 from django.utils import timezone
 from ckeditor.fields import RichTextField
-
 # Create your models here.
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -22,10 +21,6 @@ class Quiz(models.Model):
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        value = self.name
-        self.slug = slugify(value)
-        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('quiz_start', args=(self.slug,))
@@ -37,6 +32,8 @@ class Question(models.Model):
     text = RichTextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now = True)
+
+    
 
     def __str__(self):
         return self.text[:30]
